@@ -1,11 +1,12 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
 
-import {PathKey} from "../libraries/PathKey.sol";
-import {PoolKey} from "@v4/src/types/PoolKey.sol";
-import {Currency} from "@v4/src/types/Currency.sol";
-import {BalanceDelta} from "@v4/src/types/BalanceDelta.sol";
-import {ISignatureTransfer} from "@permit2/interfaces/ISignatureTransfer.sol";
+import { PoolKey } from "@uniswap/v4-core/src/types/PoolKey.sol";
+import { Currency } from "@uniswap/v4-core/src/types/Currency.sol";
+import { BalanceDelta } from "@uniswap/v4-core/src/types/BalanceDelta.sol";
+import { ISignatureTransfer } from "@uniswap/permit2/interfaces/ISignatureTransfer.sol";
+
+import { PathKey } from "@/libraries/PathKey.sol";
 
 /// @title Uniswap V4 Swap Router
 /// @notice A simple, stateless router for execution of swaps against Uniswap v4 Pools
@@ -161,9 +162,6 @@ interface IUniswapV4Router04 {
     /// @param deadline block.timestamp must be before this value, otherwise the transaction will revert
     /// @return Delta the balance changes from the swap
     function swap(bytes calldata data, uint256 deadline) external payable returns (BalanceDelta);
-
-    /// @notice Provides calldata compression fallback
-    fallback() external payable;
 
     /// @notice Provides ETH receipts locked to Pool Manager
     receive() external payable;

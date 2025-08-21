@@ -1,6 +1,9 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
 
+import { Locker } from "@uniswap/v4-periphery/src/libraries/Locker.sol";
+
+import { IPoolManager, SwapFlags, BaseData, BaseSwapRouter } from "./base/BaseSwapRouter.sol";
 import {
     PathKey,
     PoolKey,
@@ -9,13 +12,9 @@ import {
     ISignatureTransfer,
     IUniswapV4Router04
 } from "./interfaces/IUniswapV4Router04.sol";
-import {LibZip} from "@solady/src/utils/LibZip.sol";
-import {Locker} from "@v4-periphery/src/libraries/Locker.sol";
-import {Multicallable} from "@solady/src/utils/Multicallable.sol";
-import {IPoolManager, SwapFlags, BaseData, BaseSwapRouter} from "./base/BaseSwapRouter.sol";
 
 /// @title Uniswap V4 Swap Router
-contract UniswapV4Router04 is IUniswapV4Router04, BaseSwapRouter, Multicallable {
+contract UniswapV4Router04 is IUniswapV4Router04, BaseSwapRouter {
     modifier setMsgSender() {
         Locker.set(msg.sender);
         _;
@@ -25,7 +24,7 @@ contract UniswapV4Router04 is IUniswapV4Router04, BaseSwapRouter, Multicallable 
     constructor(IPoolManager manager, ISignatureTransfer _permit2)
         payable
         BaseSwapRouter(manager, _permit2)
-    {}
+    { }
 
     /// -----------------------
 
@@ -256,11 +255,6 @@ contract UniswapV4Router04 is IUniswapV4Router04, BaseSwapRouter, Multicallable 
     /// @inheritdoc IUniswapV4Router04
     function msgSender() public view virtual returns (address) {
         return Locker.get();
-    }
-
-    /// @inheritdoc IUniswapV4Router04
-    fallback() external payable virtual {
-        LibZip.cdFallback();
     }
 
     /// @inheritdoc IUniswapV4Router04

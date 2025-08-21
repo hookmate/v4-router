@@ -1,16 +1,18 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
 
-import {SwapFlags} from "../libraries/SwapFlags.sol";
-import {SafeCast} from "@v4/src/libraries/SafeCast.sol";
-import {TickMath} from "@v4/src/libraries/TickMath.sol";
-import {CurrencySettler} from "@v4/test/utils/CurrencySettler.sol";
-import {BalanceDelta, toBalanceDelta} from "@v4/src/types/BalanceDelta.sol";
-import {ISignatureTransfer} from "@permit2/interfaces/ISignatureTransfer.sol";
-import {IPoolManager, SafeCallback} from "@v4-periphery/src/base/SafeCallback.sol";
+import { SafeCast } from "@uniswap/v4-core/src/libraries/SafeCast.sol";
+import { TickMath } from "@uniswap/v4-core/src/libraries/TickMath.sol";
+import { BalanceDelta, toBalanceDelta } from "@uniswap/v4-core/src/types/BalanceDelta.sol";
+import { ISignatureTransfer } from "@uniswap/permit2/interfaces/ISignatureTransfer.sol";
+import { IPoolManager, SwapParams } from "@uniswap/v4-core/src/interfaces/IPoolManager.sol";
+import { SafeCallback } from "@uniswap/v4-periphery/src/base/SafeCallback.sol";
+
 import {
     Currency, CurrencyLibrary, PoolKey, PathKey, PathKeyLibrary
-} from "../libraries/PathKey.sol";
+} from "@/libraries/PathKey.sol";
+import { SwapFlags } from "@/libraries/SwapFlags.sol";
+import { CurrencySettler } from "@/utils/CurrencySettler.sol";
 
 struct BaseData {
     uint256 amount;
@@ -119,7 +121,9 @@ abstract contract BaseSwapRouter is SafeCallback {
                 );
                 poolManager.settle();
             } else {
-                if (inputCurrency.isAddressZero()) poolManager.sync(inputCurrency);
+                if (inputCurrency.isAddressZero()) {
+                    poolManager.sync(inputCurrency);
+                }
                 inputCurrency.settle(poolManager, data.payer, inputAmount, input6909);
             }
 
@@ -271,7 +275,7 @@ abstract contract BaseSwapRouter is SafeCallback {
     ) internal virtual returns (BalanceDelta) {
         return poolManager.swap(
             poolKey,
-            IPoolManager.SwapParams({
+            SwapParams({
                 zeroForOne: zeroForOne,
                 amountSpecified: amountSpecified,
                 sqrtPriceLimitX96: zeroForOne ? MIN : MAX

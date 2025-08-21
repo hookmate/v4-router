@@ -1,10 +1,23 @@
-# V4 Swap Router
+# Uniswap V4 Swap Router
 
-A simple and optimized router for swapping on Uniswap V4. ABI inspired by [`UniswapV2Router02`](https://github.com/Uniswap/v2-periphery/blob/master/contracts/UniswapV2Router02.sol).
+Fork of [V4 Swap Router](https://github.com/z0r0z/v4-router) from z0r0z & saucepoint. I'd highly recommend checking out their repo for additional information and instructions.
 
-Deployment: [`0x00000000000044a361Ae3cAc094c9D1b14Eece97`](https://contractscan.xyz/contract/0x00000000000044a361Ae3cAc094c9D1b14Eece97)
+This fork makes the following material modifications:
 
-3 audits were performed: [*Audits*](./audits)
+1. Implements a safe CurrencySettler which supports non-standard tokens like USDT. The original router did not support these tokens.
+2. Removes LibZip. Most L2s now implement Calldata Compression natively, which makes LibZip less useful. Not to mention that it makes reading transactions on a block explorer really hard.
+3. Removes Multicall. The router already implements multi-hop swaps and Multicall does not support ETH input.
+4. Compiled using solc `0.8.30` with higher optimizer runs.
+
+The fork makes the following non-material modifications:
+
+1. Tests are removed since they depended on the `Deployers` test implementation which is limited to `0.8.26`. However, the router has no material changes and the test suite from the original repository passes on this version.
+2. Imports are standardized and singular import scheme is used instead of duplicated remappings.
+3. No more submodules. Dependencies are managed as node modules via `pnpm`.
+
+Deployment: TBD
+
+No additional audits were performed beyond the ones on the original repository.
 
 ## Design
 
@@ -21,141 +34,11 @@ The Uniswap V4 Swap Router supports the following features:
 
 ## Install
 
-*requires [foundry](https://book.getfoundry.sh)*
+_requires [foundry](https://book.getfoundry.sh)_
 
 ```bash
 forge install z0r0z/v4-router
 ```
-
-## Exact Input
-
-- For swaps, where users are specifying the input amount and want the maximum output possible
-
-*Trade 1000 USDC into x Ether*
-
-### Single Pool Swaps - Exact Input
-
-For simple swaps on a singular pool
-
-```solidity
-IUniswapV4Router04 router = IUniswapV4Router04(...);
-
-uint256 amountIn = 1e18;                 // amount of input tokens
-uint256 amountOutMin = 0.99e18;          // minimum amount of output tokens, otherwise revert
-bool zeroForOne = true;                  // swap token0 for token1
-PoolKey memory poolKey = PoolKey(...);   // the pool to swap on
-bytes memory hookData;                   // optional arbitrary data to be provided to the hook
-uint256 deadline = block.timestamp + 60; // deadline for the transaction to be mined
-router.swapExactTokensForTokens(
-    amountIn,
-    amountOutMin,
-    zeroForOne,
-    poolKey,
-    hookData,
-    receiver,
-    deadline
-);
-```
-
-### Multihop Swaps - Exact Input
-
-For swaps trading through multiple pools
-
-```solidity
-IUniswapV4Router04 router = IUniswapV4Router04(...);
-
-// Example swapPath: A --> B --> C
-Currency startCurrency = currencyA;
-PathKey[] memory path = new PathKey[](2);
-path[0] = PathKey({
-    intermediateCurrency: currencyB,
-    fee: fee0,                           // fee tier of the (A, B) pool
-    tickSpacing: tickSpacing0,           // tick spacing of the (A, B) pool
-    hooks: IHooks(address(...)),         // hook address of the (A, B) pool
-    hookData: hookData0                  // optional arbitrary bytes to passed to the (A, B) pool's beforeSwap/afterSwap functions
-});
-path[1] = PathKey({
-    intermediateCurrency: currencyC,
-    fee: fee1,                           // fee tier of the (B, C) pool
-    tickSpacing: tickSpacing1,           // tick spacing of the (B, C) pool
-    hooks: IHooks(address(...)),         // hook address of the (B, C) pool
-    hookData: hookData1                  // optional arbitrary bytes to passed to the (B, C) pool's beforeSwap/afterSwap functions
-});
-
-uint256 amountIn = 1e18;                 // amount of input tokens
-uint256 amountOutMin = 0.99e18;          // minimum amount of output tokens, otherwise revert
-uint256 deadline = block.timestamp + 60; // deadline for the transaction to be mined
-router.swapExactTokensForTokens(
-    amountIn, amountOutMin, startCurrency, path, receiver, deadline
-);
-```
-
----
-
-## Exact Output
-
-- For swaps, where users are specifying the output amount and want the minimum input possible
-
-*Trade x USDC into 1.0 Ether*
-
-### Single Pool Swaps - Exact Output
-
-For simple swaps on a singular pool
-
-```solidity
-IUniswapV4Router04 router = IUniswapV4Router04(...);
-
-uint256 amountOut = 1e18;                // amount of output tokens expected
-uint256 amountInMax = 1.01e18;           // maximum amount of input tokens, otherwise revert
-bool zeroForOne = true;                  // swap token0 for token1
-PoolKey memory poolKey = PoolKey(...);   // the pool to swap on
-bytes memory hookData;                   // optional arbitrary data to be provided to the hook
-uint256 deadline = block.timestamp + 60; // deadline for the transaction to be mined
-router.swapTokensForExactTokens(
-    amountOut,
-    amountInMax,
-    zeroForOne,
-    poolKey,
-    ZERO_BYTES,
-    receiver,
-    deadline
-);
-```
-
-### Multihop Swaps - Exact Output
-
-For swaps trading through multiple pools
-
-```solidity
-IUniswapV4Router04 router = IUniswapV4Router04(...);
-
-// Example swapPath: A --> B --> C
-Currency startCurrency = currencyA;
-PathKey[] memory path = new PathKey[](2);
-path[0] = PathKey({
-    intermediateCurrency: currencyB,
-    fee: fee0,                           // fee tier of the (A, B) pool
-    tickSpacing: tickSpacing0,           // tick spacing of the (A, B) pool
-    hooks: IHooks(address(...)),         // hook address of the (A, B) pool
-    hookData: hookData0                  // optional arbitrary bytes to passed to the (A, B) pool's beforeSwap/afterSwap functions
-});
-path[1] = PathKey({
-    intermediateCurrency: currencyC,
-    fee: fee1,                           // fee tier of the (B, C) pool
-    tickSpacing: tickSpacing1,           // tick spacing of the (B, C) pool
-    hooks: IHooks(address(...)),         // hook address of the (B, C) pool
-    hookData: hookData1                  // optional arbitrary bytes to passed to the (B, C) pool's beforeSwap/afterSwap functions
-});
-
-uint256 amountOut = 1e18;                // amount of output tokens expected
-uint256 amountInMax = 1.01e18;           // maximum amount of input tokens, otherwise revert
-uint256 deadline = block.timestamp + 60; // deadline for the transaction to be mined
-router.swapTokensForExactTokens(
-    amountOut, amountInMax, startCurrency, path, receiver, deadline
-);
-```
-
-For additional usage examples, please see [test/UniswapV4Router04.multihop.t.sol](/test/UniswapV4Router04.multihop.t.sol)
 
 ## Architecture
 
@@ -179,16 +62,19 @@ The implementation prioritizes gas efficiency through:
 The router provides three categories of swap functions:
 
 ### Multi-pool Swaps
+
 - `swapExactTokensForTokens`: Swap exact input amount through multiple pools
 - `swapTokensForExactTokens`: Receive exact output amount through multiple pools
 - `swap`: Generic multi-pool swap interface
 
 ### Single-pool Swaps
+
 - `swapExactTokensForTokens`: Swap exact input in a single pool
 - `swapTokensForExactTokens`: Receive exact output from a single pool
 - `swap`: Generic single-pool swap interface
 
 ### Optimized Swaps
+
 - `swap(bytes, uint256)`: Pre-encoded swap data for reduced gas costs
 
 ## Path Construction

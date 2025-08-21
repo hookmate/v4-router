@@ -1,40 +1,12 @@
 [profile.default]
-solc_version = "0.8.26"
+bytecode_hash = "none"
 evm_version = "cancun"
 ffi = true
-fs_permissions = [{ access = "read-write", path = ".forge-snapshots/"}]
-
-via_ir = true
 optimizer = true
-optimizer_runs = 9_999_999
-
-additional_compiler_profiles = [
-  { name = "test", via_ir = true, optimizer_runs = 1 }
-]
-
-compilation_restrictions = [
-  { paths = "test/**", via_ir = true, optimizer_runs = 1 }
-]
-
-remappings = [
-  "@v4=lib/v4-core/",
-  "@solady=lib/solady/",
-  "v4-core/=lib/v4-core/",
-  "@permit2=lib/permit2/src/",
-  "@forge=lib/forge-std/src/",
-  "@uniswap/v4-core/=lib/v4-core/",
-  "@v4-periphery/=lib/v4-periphery/",
-  "@v4-template/=lib/v4-template/",
-  "forge-std/=lib/v4-core/lib/forge-std/src/",
-  "@universal-router/=lib/universal-router/contracts/"
-]
+optimizer_runs = 10_000_000
+solc_version = "0.8.30"
+via_ir = true
 
 [fmt]
+bracket_spacing = true
 line_length = 100
-
-[rpc_endpoints]
-main = "https://rpc.ankr.com/eth"
-base = "https://rpc.ankr.com/base"
-poly = "https://rpc.ankr.com/polygon"
-opti = "https://rpc.ankr.com/optimism"
-arbi = "https://rpc.ankr.com/arbitrum"
