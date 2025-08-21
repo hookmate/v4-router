@@ -1,9 +1,8 @@
 [profile.default]
 bytecode_hash = "none"
 evm_version = "cancun"
-ffi = true
 optimizer = true
-optimizer_runs = 10_000_000
+optimizer_runs = 44_444_444
 solc_version = "0.8.30"
 via_ir = true
 
