@@ -17,25 +17,25 @@ The fork makes the following **non-material** modifications:
 
 ## Deployment
 
-| Chain            | Expected Address                           | Link                                                                                                    |
-| ---------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
-| Ethereum         | 0xA4B6DB94b3017e2b7f17055Ded97D117ed5F551A | [Etherscan](https://etherscan.io/address/0xA4B6DB94b3017e2b7f17055Ded97D117ed5F551A)                    |
-| Unichain         | 0x67C9C6050978c1582E4A633760B80CA2eff4015A | [Uniscan](https://uniscan.xyz/address/0x67C9C6050978c1582E4A633760B80CA2eff4015A)                       |
-| OP Mainnet       | 0x186EAA4941DF95c6058C69FB30dfE23C2827f9Ac | [Etherscan](https://optimistic.etherscan.io/address/0x186EAA4941DF95c6058C69FB30dfE23C2827f9Ac)         |
-| Base             | 0x15c40591096E938FE2A62515A7f4B8f4349D1DEE | [BaseScan](https://basescan.org/address/0x15c40591096E938FE2A62515A7f4B8f4349D1DEE)                     |
-| Arbitrum One     | 0xC0077d448203c71f6b18061C2E95409b386982BE | [Arbiscan](https://arbiscan.io/address/0xC0077d448203c71f6b18061C2E95409b386982BE)                      |
-| Polygon          | 0x8b318E3CcF4495108E8Db61a5814f6bAE98e1465 | [PolygonScan](https://polygonscan.com/address/0x8b318E3CcF4495108E8Db61a5814f6bAE98e1465)               |
-| Blast            | 0xE8835Fff71cC8e2253C959683914f24d50Ac9699 | [BlastScan](https://blastscan.io/address/0xE8835Fff71cC8e2253C959683914f24d50Ac9699)                    |
-| Zora             | 0x1770E250A9b67E44206542148ed7C5Df38235003 | [Zora Explorer](https://explorer.zora.energy/address/0x1770E250A9b67E44206542148ed7C5Df38235003)        |
-| World Chain      | 0x3D9e82fb83cA3BDa838AF22d7F3964b25Df64EE7 | [WorldScan](https://worldscan.org/address/0x3D9e82fb83cA3BDa838AF22d7F3964b25Df64EE7)                   |
-| Ink              | 0xC0077d448203c71f6b18061C2E95409b386982BE | [Ink Explorer](https://explorer.inkonchain.com/address/0xC0077d448203c71f6b18061C2E95409b386982BE)      |
-| Soneium          | 0xC0077d448203c71f6b18061C2E95409b386982BE | [Soneium Blockscout](https://soneium.blockscout.com/address/0xC0077d448203c71f6b18061C2E95409b386982BE) |
-| Avalanche        | 0x342F35aE81cd6743A4727CdD57e883C877a65aC2 | [Snowtrace](https://snowtrace.io/address/0x342F35aE81cd6743A4727CdD57e883C877a65aC2)                    |
-| BNB Smart Chain  | 0x9461852Ae90c5633207283762a1b5Db337FB3F44 | [BscScan](https://bscscan.com/address/0x9461852Ae90c5633207283762a1b5Db337FB3F44)                       |
-| Sepolia          | 0xf13D190e9117920c703d79B5F33732e10049b115 | [Etherscan](https://sepolia.etherscan.io/address/0xf13D190e9117920c703d79B5F33732e10049b115)            |
-| Unichain Sepolia | 0x9cD2b0a732dd5e023a5539921e0FD1c30E198Dba | [Uniscan](https://sepolia.uniscan.xyz/address/0x9cD2b0a732dd5e023a5539921e0FD1c30E198Dba)               |
-| Base Sepolia     | 0x71cD4Ea054F9Cb3D3BF6251A00673303411A7DD9 | [BaseScan](https://sepolia.basescan.org/address/0x71cD4Ea054F9Cb3D3BF6251A00673303411A7DD9)             |
-| Arbitrum Sepolia | 0xcD8D7e10A7aA794C389d56A07d85d63E28780220 | [Arbiscan](https://sepolia.arbiscan.io/address/0xcD8D7e10A7aA794C389d56A07d85d63E28780220)              |
+| Chain            | Address                                      | Link                                                                                                    |
+| ---------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Ethereum         | `0xA4B6DB94b3017e2b7f17055Ded97D117ed5F551A` | [Etherscan](https://etherscan.io/address/0xA4B6DB94b3017e2b7f17055Ded97D117ed5F551A)                    |
+| Unichain         | `0x67C9C6050978c1582E4A633760B80CA2eff4015A` | [Uniscan](https://uniscan.xyz/address/0x67C9C6050978c1582E4A633760B80CA2eff4015A)                       |
+| OP Mainnet       | `0x186EAA4941DF95c6058C69FB30dfE23C2827f9Ac` | [Etherscan](https://optimistic.etherscan.io/address/0x186EAA4941DF95c6058C69FB30dfE23C2827f9Ac)         |
+| Base             | `0x15c40591096E938FE2A62515A7f4B8f4349D1DEE` | [BaseScan](https://basescan.org/address/0x15c40591096E938FE2A62515A7f4B8f4349D1DEE)                     |
+| Arbitrum One     | `0xC0077d448203c71f6b18061C2E95409b386982BE` | [Arbiscan](https://arbiscan.io/address/0xC0077d448203c71f6b18061C2E95409b386982BE)                      |
+| Polygon          | `0x8b318E3CcF4495108E8Db61a5814f6bAE98e1465` | [PolygonScan](https://polygonscan.com/address/0x8b318E3CcF4495108E8Db61a5814f6bAE98e1465)               |
+| Blast            | `0xE8835Fff71cC8e2253C959683914f24d50Ac9699` | [BlastScan](https://blastscan.io/address/0xE8835Fff71cC8e2253C959683914f24d50Ac9699)                    |
+| Zora             | `0x1770E250A9b67E44206542148ed7C5Df38235003` | [Zora Explorer](https://explorer.zora.energy/address/0x1770E250A9b67E44206542148ed7C5Df38235003)        |
+| World Chain      | `0x3D9e82fb83cA3BDa838AF22d7F3964b25Df64EE7` | [WorldScan](https://worldscan.org/address/0x3D9e82fb83cA3BDa838AF22d7F3964b25Df64EE7)                   |
+| Ink              | `0xC0077d448203c71f6b18061C2E95409b386982BE` | [Ink Explorer](https://explorer.inkonchain.com/address/0xC0077d448203c71f6b18061C2E95409b386982BE)      |
+| Soneium          | `0xC0077d448203c71f6b18061C2E95409b386982BE` | [Soneium Blockscout](https://soneium.blockscout.com/address/0xC0077d448203c71f6b18061C2E95409b386982BE) |
+| Avalanche        | `0x342F35aE81cd6743A4727CdD57e883C877a65aC2` | [Snowtrace](https://snowtrace.io/address/0x342F35aE81cd6743A4727CdD57e883C877a65aC2)                    |
+| BNB Smart Chain  | `0x9461852Ae90c5633207283762a1b5Db337FB3F44` | [BscScan](https://bscscan.com/address/0x9461852Ae90c5633207283762a1b5Db337FB3F44)                       |
+| Sepolia          | `0xf13D190e9117920c703d79B5F33732e10049b115` | [Etherscan](https://sepolia.etherscan.io/address/0xf13D190e9117920c703d79B5F33732e10049b115)            |
+| Unichain Sepolia | `0x9cD2b0a732dd5e023a5539921e0FD1c30E198Dba` | [Uniscan](https://sepolia.uniscan.xyz/address/0x9cD2b0a732dd5e023a5539921e0FD1c30E198Dba)               |
+| Base Sepolia     | `0x71cD4Ea054F9Cb3D3BF6251A00673303411A7DD9` | [BaseScan](https://sepolia.basescan.org/address/0x71cD4Ea054F9Cb3D3BF6251A00673303411A7DD9)             |
+| Arbitrum Sepolia | `0xcD8D7e10A7aA794C389d56A07d85d63E28780220` | [Arbiscan](https://sepolia.arbiscan.io/address/0xcD8D7e10A7aA794C389d56A07d85d63E28780220)              |
 
 ## Audits
 
